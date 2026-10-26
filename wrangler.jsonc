@@ -1,0 +1,15 @@
+{
+  "name": "growledger-website",
+  "compatibility_date": "2026-10-26",
+  "assets": {
+    "directory": "./public",
+    "not_found_handling": "404-page"
+  },
+  "routes": [
+    { "pattern": "growledger.com", "custom_domain": true },
+    { "pattern": "www.growledger.com", "custom_domain": true }
+  ],
+  // Branch builds upload a version with its own preview URL instead of going live
+  "workers_dev": true,
+  "preview_urls": true
+}
