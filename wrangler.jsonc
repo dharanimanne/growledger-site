@@ -11,5 +11,7 @@
   ],
   // Branch builds upload a version with its own preview URL instead of going live
   "workers_dev": true,
-  "preview_urls": true
+  "preview_urls": true,
+  // Required by `wrangler preview`, which Workers Builds runs for pull requests
+  "previews": {}
 }
