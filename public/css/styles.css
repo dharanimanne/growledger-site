@@ -263,7 +263,7 @@ footer img{height:38px;width:auto;display:block;mix-blend-mode:multiply}
 @media (max-width:420px){.top .right>.btn{display:none}}
 .cline a.v{text-decoration:none}
 .cline a.v:hover{color:var(--green)}
-.cline .addr{font-style:normal;font-size:15px;line-height:1.55;color:var(--ink-2);margin-top:4px}
+.cline .addr{font-style:normal;font-family:var(--serif);font-size:clamp(26px,2.6vw,32px);line-height:1.1;color:var(--ink);word-break:break-word}
 .cline a.copy{text-decoration:none}
 .cline a.copy:hover{color:var(--green);border-color:var(--green)}
 .mt{margin-top:12px}
