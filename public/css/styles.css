@@ -89,7 +89,7 @@ h1 em,h2 em{font-style:italic;color:var(--green)}
 /* header */
 .top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(252,251,248,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--hair)}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:12px}
-.top img{height:42px;width:auto;display:block;mix-blend-mode:multiply}
+.top img{height:48px;width:auto;display:block;mix-blend-mode:multiply}
 .top nav{display:flex;gap:clamp(16px,2vw,26px);font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
 .top nav a{text-decoration:none;color:var(--ink-2);padding-block:6px}
 .top nav a:hover{color:var(--green)}
@@ -247,7 +247,7 @@ h1 em,h2 em{font-style:italic;color:var(--green)}
 
 footer{padding-block:24px 40px}
 footer .wrap>div{border-top:2px solid var(--rule);padding-top:18px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px 24px;align-items:center;font-size:12.5px;color:var(--ink-2)}
-footer img{height:34px;width:auto;display:block;mix-blend-mode:multiply}
+footer img{height:38px;width:auto;display:block;mix-blend-mode:multiply}
 
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.draw,.draw2{stroke-dashoffset:0}.pop{opacity:1}}
 
