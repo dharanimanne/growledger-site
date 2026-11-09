@@ -5,10 +5,11 @@ A static, single-page site built from the approved Claude artifact design. It ne
 ```
 wrangler.jsonc        Cloudflare Worker config (static assets only, serves public/)
 public/               everything below is what gets published
-index.html            page markup, SEO meta tags and JSON-LD structured data
+index.html            the whole home page: markup, inline styles and script, SEO meta tags, JSON-LD
+  privacy.html          privacy policy
+  insights/             one page per Insights article
 404.html              not-found page (wrangler.jsonc: not_found_handling "404-page")
-css/styles.css        all styles; self-hosted @font-face rules first, design tokens in :root
-js/main.js            mobile menu, copy buttons, Join Us application builder
+css/styles.css        styles for 404.html
 assets/fonts/         Instrument Serif and Archivo (latin subset, woff2, OFL)
 assets/brand/         logo (full-size PNG for search engines, 400px WebP for the page), icons, og-image.png
 assets/team/          partner photos (296px WebP)
@@ -30,7 +31,7 @@ Serve public/ at the site root: icons, fonts and the 404 page use root-relative 
 
 ## Forms
 
-The Join Us form submits nothing to a server. It builds the application text and offers to send it by WhatsApp (+91 81058 53262) or email (info@growledger.com), or to copy it. To change where applications go, edit the two URLs in `js/main.js`.
+The contact form posts to FormSubmit (https://formsubmit.co), which emails each message to info@growledger.com. The first live submission sends an activation email to that inbox; click it once. If sending fails, the form offers WhatsApp (+91 81058 53262) or email instead.
 
 ## SEO notes
 
