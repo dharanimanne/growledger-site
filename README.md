@@ -50,3 +50,9 @@ Changes go through GitHub pull requests; Cloudflare Workers Builds deploys them:
 Undo a release with `npx wrangler rollback` or by reverting the merge on GitHub. See `CLAUDE.md` for editing rules.
 
 `growledger.com` and `www.growledger.com` are Worker custom domains (`wrangler.jsonc`); a Cloudflare Redirect Rule sends `www` to the apex. Never change the zone's MX or TXT (SPF, DKIM, DMARC) records; they carry `info@growledger.com` mail.
+
+## Pages
+
+- `/` home page, `/the-cfo-role.html` (nine CFO roles and a self-check), `/privacy.html`
+- `/services/` six service pages, `/insights/` articles, `/case-studies/` illustrative case studies
+- Scroll effects, the floating WhatsApp button and the phone quick-contact bar are inline in each page; they switch off for visitors who prefer reduced motion.
