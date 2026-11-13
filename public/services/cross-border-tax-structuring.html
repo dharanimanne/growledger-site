@@ -38,6 +38,13 @@ footer{background:var(--night);color:#A8B5AD;font-size:14px;padding:32px 0}foote
 .role{background:var(--off);padding:18px;display:grid;gap:6px;align-content:start;border-top:3px solid var(--green)}.role .rn{font-size:13px;font-weight:800;color:var(--green);letter-spacing:.08em}.role h4{font-size:18px;margin:0}.role .rq{font-weight:600;font-size:15.5px;line-height:1.45}.role .rw{font-size:14.5px;color:var(--ink-2);line-height:1.5;border-top:1px solid var(--rule);padding-top:8px;margin-top:2px}.role .rw b{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--green)}
 article:has(.roles){max-width:1000px}
 :focus-visible{outline:2px solid var(--green);outline-offset:3px}
+
+/* motion: only when JS runs and the visitor allows motion */
+.mo .rv{opacity:0;transform:translate3d(0,26px,0);transition:opacity .9s cubic-bezier(.16,.84,.3,1),transform .9s cubic-bezier(.16,.84,.3,1)}
+.mo .rv.in{opacity:1;transform:none}
+.sprog{position:fixed;left:0;top:0;height:3px;width:100%;background:#2E6B3C;transform-origin:0 50%;transform:scaleX(0);z-index:200;pointer-events:none}
+[data-par]{will-change:transform}
+
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Service", "name": "Cross-border tax structuring", "serviceType": "Cross-border tax structuring", "description": "The right group structure, treaty position and transfer pricing for money moving into and out of India, set up correctly from the start.", "url": "https://growledger.com/services/cross-border-tax-structuring.html", "areaServed": [{"@type": "City", "name": "Hyderabad"}, {"@type": "City", "name": "Bengaluru"}, {"@type": "Country", "name": "India"}], "provider": {"@type": "ProfessionalService", "name": "GrowLedger Advisors LLP", "url": "https://growledger.com/", "telephone": "+91-81058-53262"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How can a tax treaty reduce tax on payments abroad?", "acceptedAnswer": {"@type": "Answer", "text": "India’s tax treaties often set a lower withholding rate on royalties, fees for technical services, interest and dividends than domestic law. The lower rate applies only where the recipient qualifies and the required documents, such as a tax residency certificate, are in place."}}, {"@type": "Question", "name": "What is transfer pricing?", "acceptedAnswer": {"@type": "Answer", "text": "When related companies in different countries trade with each other, the price must be what independent parties would agree. Transfer pricing rules require you to set and document that price every year."}}, {"@type": "Question", "name": "Do you help set up entities outside India?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. We help founders and groups plan overseas entities and the Indian tax and FEMA steps involved."}}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://growledger.com/"}, {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://growledger.com/#about"}, {"@type": "ListItem", "position": 3, "name": "Cross-border tax structuring", "item": "https://growledger.com/services/cross-border-tax-structuring.html"}]}</script><style>.lead{margin-top:18px;font-size:20px;color:var(--ink-2)}.svc{margin-top:36px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 32px}@media (max-width:700px){.svc{grid-template-columns:1fr}}
 .svc div{border-top:1px solid var(--rule);padding:16px 0}.svc b{display:block;font-size:17.5px}.svc p{font-size:15.5px;color:var(--ink-2)}
@@ -55,6 +62,7 @@ details{border-top:1px solid var(--rule);padding:14px 0}details:last-of-type{bor
 <div class="ctas"><a class="btn" href="/#contact">Book a free 30-minute review</a><a class="btn line" href="tel:+918105853262">Call +91 81058 53262</a></div>
 <h2>What is included</h2>
 <div class="svc"><div><b>Group and holding structures</b><p>Choosing where and how to hold Indian and overseas entities.</p></div><div><b>Tax treaty benefits</b><p>Applying treaty rates on royalties, fees, interest and dividends where they are available, with the required documents.</p></div><div><b>Withholding tax</b><p>Correct tax deduction on payments abroad, and the related filings.</p></div><div><b>Transfer pricing</b><p>Arm’s length pricing, safe harbour options and annual documentation.</p></div><div><b>FEMA compliance</b><p>Reporting for foreign investment, overseas investment and remittances.</p></div><div><b>Repatriation planning</b><p>Moving profits back to the parent in a tax-efficient way.</p></div></div>
+
 <h2>Who it is for</h2>
 <ul class="who"><li>Indian companies paying royalties or fees abroad</li><li>Global companies with Indian subsidiaries or GCCs</li><li>Founders setting up overseas entities</li></ul>
 <h2>How we start</h2>
@@ -67,5 +75,20 @@ details{border-top:1px solid var(--rule);padding:14px 0}details:last-of-type{bor
 <section class="more" style="padding-top:0;border-top:0"><h2 style="margin-top:0;font-size:22px">Other services</h2><div class="mg"><a href="virtual-cfo-services.html"><span>Service</span><b>Virtual CFO services</b></a><a href="tax-gst-advisory.html"><span>Service</span><b>Tax and GST advisory</b></a><a href="fundraising-due-diligence.html"><span>Service</span><b>Fundraising and due diligence</b></a><a href="india-entry-gcc-setup.html"><span>Service</span><b>India entry and GCC set-up</b></a><a href="family-business-advisory.html"><span>Service</span><b>Family business advisory</b></a></div></section>
 </main>
 <footer><div class="wrap"><a href="/"><img src="/assets/brand/growledger-lockup-light-400.webp" alt="GrowLedger Advisors" width="148" height="40"></a><span>© 2026 GrowLedger Advisors LLP · <a href="/privacy.html">Privacy policy</a> · info@growledger.com · +91 81058 53262</span></div></footer>
+<script>(function(){var d=document.documentElement;if(!window.IntersectionObserver||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+d.classList.add('mo');
+var S='main h1, main h2, main .eyebrow, main .lead, main .sub, .sec .wrap > *, .sec2 > *, .hero2 .in > *, main article > *, .csg > *, .rg > *, .pillars3 > *, .grid3 > *, .people > *, .d90-g > *, .steps4 > *, .itot > *, .levt > *, .roles > *, .mg > *, .svc > *, .kpis > *, .tl > *, .steps5 > *, .jd > *, details, .faq details, .cta';
+var seen=new Set(),els=[];[].forEach.call(document.querySelectorAll(S),function(e){if(seen.has(e)||e.closest('.hero,.top,.drawer,footer'))return;var p=e.parentElement;while(p){if(seen.has(p)&&!/^(MAIN|SECTION)$/.test(p.tagName)&&!p.matches('.sec .wrap,.sec2,article'))break;p=p.parentElement}seen.add(e);els.push(e)});
+els.forEach(function(e){var i=[].indexOf.call(e.parentElement.children,e);e.classList.add('rv');e.style.transitionDelay=(Math.min(i,6)*70)+'ms'});
+function count(el){var t=el.textContent,m=t.match(/(\d+(?:\.\d+)?)/);if(!m)return;var end=parseFloat(m[1]),dec=(m[1].split('.')[1]||'').length,pre=t.slice(0,m.index),post=t.slice(m.index+m[1].length),t0=null;
+function f(ts){t0=t0||ts;var k=Math.min(1,(ts-t0)/1300);k=1-Math.pow(1-k,3);el.textContent=pre+(end*k).toFixed(dec)+post;if(k<1)requestAnimationFrame(f)}requestAnimationFrame(f)}
+var io=new IntersectionObserver(function(es){es.forEach(function(x){if(!x.isIntersecting)return;var t=x.target;io.unobserve(t);if(t.hasAttribute('data-count'))count(t);else t.classList.add('in')})},{rootMargin:'0px 0px -6% 0px',threshold:.08});
+els.forEach(function(e){io.observe(e)});[].forEach.call(document.querySelectorAll('[data-count]'),function(e){io.observe(e)});
+setTimeout(function(){els.forEach(function(e){var r=e.getBoundingClientRect();if(r.top<innerHeight)e.classList.add('in')})},60);
+var bar=document.createElement('div');bar.className='sprog';bar.setAttribute('aria-hidden','true');document.body.appendChild(bar);
+var par=[].slice.call(document.querySelectorAll('[data-par]')),tick=false;
+function on(){tick=false;var h=d.scrollHeight-innerHeight,y=scrollY;bar.style.transform='scaleX('+(h>0?y/h:0)+')';par.forEach(function(p){p.style.transform='translate3d(0,'+(y*0.18)+'px,0)'})}
+addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(on)}},{passive:true});on();
+})();</script>
 </body>
 </html>

@@ -38,6 +38,13 @@ footer{background:var(--night);color:#A8B5AD;font-size:14px;padding:32px 0}foote
 .role{background:var(--off);padding:18px;display:grid;gap:6px;align-content:start;border-top:3px solid var(--green)}.role .rn{font-size:13px;font-weight:800;color:var(--green);letter-spacing:.08em}.role h4{font-size:18px;margin:0}.role .rq{font-weight:600;font-size:15.5px;line-height:1.45}.role .rw{font-size:14.5px;color:var(--ink-2);line-height:1.5;border-top:1px solid var(--rule);padding-top:8px;margin-top:2px}.role .rw b{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--green)}
 article:has(.roles){max-width:1000px}
 :focus-visible{outline:2px solid var(--green);outline-offset:3px}
+
+/* motion: only when JS runs and the visitor allows motion */
+.mo .rv{opacity:0;transform:translate3d(0,26px,0);transition:opacity .9s cubic-bezier(.16,.84,.3,1),transform .9s cubic-bezier(.16,.84,.3,1)}
+.mo .rv.in{opacity:1;transform:none}
+.sprog{position:fixed;left:0;top:0;height:3px;width:100%;background:#2E6B3C;transform-origin:0 50%;transform:scaleX(0);z-index:200;pointer-events:none}
+[data-par]{will-change:transform}
+
 </style>
 
 </head><body>
@@ -68,5 +75,20 @@ article:has(.roles){max-width:1000px}
 </article>
 </main>
 <footer><div class="wrap"><a href="/"><img src="/assets/brand/growledger-lockup-light-400.webp" alt="GrowLedger Advisors" width="148" height="40"></a><span>© 2026 GrowLedger Advisors LLP · <a href="privacy.html">Privacy policy</a> · info@growledger.com · +91 81058 53262</span></div></footer>
+<script>(function(){var d=document.documentElement;if(!window.IntersectionObserver||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+d.classList.add('mo');
+var S='main h1, main h2, main .eyebrow, main .lead, main .sub, .sec .wrap > *, .sec2 > *, .hero2 .in > *, main article > *, .csg > *, .rg > *, .pillars3 > *, .grid3 > *, .people > *, .d90-g > *, .steps4 > *, .itot > *, .levt > *, .roles > *, .mg > *, .svc > *, .kpis > *, .tl > *, .steps5 > *, .jd > *, details, .faq details, .cta';
+var seen=new Set(),els=[];[].forEach.call(document.querySelectorAll(S),function(e){if(seen.has(e)||e.closest('.hero,.top,.drawer,footer'))return;var p=e.parentElement;while(p){if(seen.has(p)&&!/^(MAIN|SECTION)$/.test(p.tagName)&&!p.matches('.sec .wrap,.sec2,article'))break;p=p.parentElement}seen.add(e);els.push(e)});
+els.forEach(function(e){var i=[].indexOf.call(e.parentElement.children,e);e.classList.add('rv');e.style.transitionDelay=(Math.min(i,6)*70)+'ms'});
+function count(el){var t=el.textContent,m=t.match(/(\d+(?:\.\d+)?)/);if(!m)return;var end=parseFloat(m[1]),dec=(m[1].split('.')[1]||'').length,pre=t.slice(0,m.index),post=t.slice(m.index+m[1].length),t0=null;
+function f(ts){t0=t0||ts;var k=Math.min(1,(ts-t0)/1300);k=1-Math.pow(1-k,3);el.textContent=pre+(end*k).toFixed(dec)+post;if(k<1)requestAnimationFrame(f)}requestAnimationFrame(f)}
+var io=new IntersectionObserver(function(es){es.forEach(function(x){if(!x.isIntersecting)return;var t=x.target;io.unobserve(t);if(t.hasAttribute('data-count'))count(t);else t.classList.add('in')})},{rootMargin:'0px 0px -6% 0px',threshold:.08});
+els.forEach(function(e){io.observe(e)});[].forEach.call(document.querySelectorAll('[data-count]'),function(e){io.observe(e)});
+setTimeout(function(){els.forEach(function(e){var r=e.getBoundingClientRect();if(r.top<innerHeight)e.classList.add('in')})},60);
+var bar=document.createElement('div');bar.className='sprog';bar.setAttribute('aria-hidden','true');document.body.appendChild(bar);
+var par=[].slice.call(document.querySelectorAll('[data-par]')),tick=false;
+function on(){tick=false;var h=d.scrollHeight-innerHeight,y=scrollY;bar.style.transform='scaleX('+(h>0?y/h:0)+')';par.forEach(function(p){p.style.transform='translate3d(0,'+(y*0.18)+'px,0)'})}
+addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(on)}},{passive:true});on();
+})();</script>
 </body>
 </html>
