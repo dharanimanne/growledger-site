@@ -34,7 +34,41 @@ h1{font-size:clamp(32px,4.4vw,50px);margin-top:12px}.by{margin-top:14px;font-siz
 .more{border-top:1px solid var(--rule);padding:48px 0 64px}.more h2{font-size:28px}.mg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:24px}@media (max-width:860px){.mg{grid-template-columns:1fr}}
 .mg a{text-decoration:none;color:var(--ink);display:grid;gap:8px;border-top:2px solid var(--ink);padding-top:14px}.mg a span{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green)}.mg a b{font-size:19px;line-height:1.3}.mg a:hover b{text-decoration:underline}
 footer{background:var(--night);color:#A8B5AD;font-size:14px;padding:32px 0}footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;align-items:center}footer img{height:40px;width:auto;display:block}footer a{color:#F2F4F2}
+.roles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:8px 0}@media (max-width:860px){.roles{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (max-width:520px){.roles{grid-template-columns:1fr}}
+.role{background:var(--off);padding:18px;display:grid;gap:6px;align-content:start;border-top:3px solid var(--green)}.role .rn{font-size:13px;font-weight:800;color:var(--green);letter-spacing:.08em}.role h4{font-size:18px;margin:0}.role .rq{font-weight:600;font-size:15.5px;line-height:1.45}.role .rw{font-size:14.5px;color:var(--ink-2);line-height:1.5;border-top:1px solid var(--rule);padding-top:8px;margin-top:2px}.role .rw b{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--green)}
+article:has(.roles){max-width:1000px}
 :focus-visible{outline:2px solid var(--green);outline-offset:3px}
+
+/* ---- motion (only with JS, and never for reduced-motion visitors) ---- */
+.mo .rv{transition-property:opacity,transform,clip-path,letter-spacing,filter;transition-duration:.95s;transition-timing-function:cubic-bezier(.16,.84,.3,1)}
+.mo .rv-up{opacity:0;transform:translate3d(0,28px,0)}
+.mo .rv-wipe{clip-path:inset(0 0 100% 0);transform:translate3d(0,18px,0)}
+.mo .rv-ls{opacity:0;letter-spacing:.42em}
+.mo .rv-l{opacity:0;transform:translate3d(-44px,0,0)}
+.mo .rv-r{opacity:0;transform:translate3d(44px,0,0)}
+.mo .rv-zoom{opacity:0;transform:scale(.86)}
+.mo .rv-photo{opacity:0;transform:scale(1.08);filter:grayscale(1)}
+.mo .rv-blur{opacity:0;filter:blur(8px)}
+.mo body{overflow-x:clip}
+@media (max-width:720px){.mo .rv-l,.mo .rv-r{transform:translate3d(0,28px,0)}}
+.mo .rv.in{opacity:1;transform:none;clip-path:inset(0 0 0 0);filter:none}
+.mo .rv-ls.in{letter-spacing:.14em}
+.sprog{position:fixed;left:0;top:0;height:3px;width:100%;background:linear-gradient(90deg,#2E6B3C,#8CC07D);transform-origin:0 50%;transform:scaleX(0);z-index:200;pointer-events:none}
+[data-par]{will-change:transform}
+/* rotating word */
+.rot{display:inline-block;position:relative;color:#8CC07D;font-weight:700;min-width:1ch}
+.rot.out{animation:rotOut .35s ease-in forwards}.rot.inw{animation:rotIn .45s cubic-bezier(.16,.84,.3,1) forwards}
+@keyframes rotOut{to{opacity:0;transform:translateY(-60%)}}@keyframes rotIn{from{opacity:0;transform:translateY(60%)}to{opacity:1;transform:none}}
+/* floating WhatsApp and mobile action bar */
+.wa-f{position:fixed;right:22px;bottom:22px;z-index:120;display:flex;align-items:center;gap:10px;background:#1F7A44;color:#fff;text-decoration:none;font:700 14px 'Archivo',Arial,sans-serif;padding:12px 18px 12px 14px;border-radius:999px;box-shadow:0 14px 30px -12px rgba(14,23,19,.55);transform:translateY(120%);opacity:0;transition:transform .5s cubic-bezier(.16,.84,.3,1),opacity .5s,background .2s}
+.wa-f.show{transform:none;opacity:1}.wa-f:hover{background:#17633A}.wa-f svg{width:22px;height:22px;flex:none}
+.mbar{display:none}
+@media (max-width:720px){.wa-f{display:none}
+.mbar{display:grid;grid-template-columns:1fr 1fr 1.3fr;position:fixed;left:0;right:0;bottom:0;z-index:120;background:#0E1713;border-top:1px solid rgba(242,244,242,.14);padding-bottom:env(safe-area-inset-bottom,0px)}
+.mbar a{display:flex;align-items:center;justify-content:center;gap:6px;min-height:54px;color:#F2F4F2;text-decoration:none;font:700 14px 'Archivo',Arial,sans-serif;border-left:1px solid rgba(242,244,242,.12)}
+.mbar a:first-child{border-left:0}.mbar a.p{background:#8CC07D;color:#0E1713}.mbar svg{width:18px;height:18px}
+body{padding-bottom:calc(54px + env(safe-area-inset-bottom,0px))}}
+
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Service", "name": "Family business advisory", "serviceType": "Family business advisory", "description": "Help for family businesses to grow, professionalise and pass on well: clear ownership, sound governance and strong monthly finance.", "url": "https://growledger.com/services/family-business-advisory.html", "areaServed": [{"@type": "City", "name": "Hyderabad"}, {"@type": "City", "name": "Bengaluru"}, {"@type": "Country", "name": "India"}], "provider": {"@type": "ProfessionalService", "name": "GrowLedger Advisors LLP", "url": "https://growledger.com/", "telephone": "+91-81058-53262"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "When should a family business plan succession?", "acceptedAnswer": {"@type": "Answer", "text": "Before it is urgent. Planning while everyone can still agree lets the family decide calmly; plans made after a health scare or dispute are made under pressure."}}, {"@type": "Question", "name": "Does every family business need a holding company?", "acceptedAnswer": {"@type": "Answer", "text": "No. A holding company can simplify ownership and succession, but only when it fits what the family wants to achieve. The tax and legal costs of moving assets need to be weighed first."}}, {"@type": "Question", "name": "Do you work with our existing lawyers?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. We work alongside your lawyers and auditors, and bring in our legal partners where needed."}}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://growledger.com/"}, {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://growledger.com/#about"}, {"@type": "ListItem", "position": 3, "name": "Family business advisory", "item": "https://growledger.com/services/family-business-advisory.html"}]}</script><style>.lead{margin-top:18px;font-size:20px;color:var(--ink-2)}.svc{margin-top:36px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 32px}@media (max-width:700px){.svc{grid-template-columns:1fr}}
 .svc div{border-top:1px solid var(--rule);padding:16px 0}.svc b{display:block;font-size:17.5px}.svc p{font-size:15.5px;color:var(--ink-2)}
@@ -52,6 +86,7 @@ details{border-top:1px solid var(--rule);padding:14px 0}details:last-of-type{bor
 <div class="ctas"><a class="btn" href="/#contact">Book a free 30-minute review</a><a class="btn line" href="tel:+918105853262">Call +91 81058 53262</a></div>
 <h2>What is included</h2>
 <div class="svc"><div><b>Succession planning</b><p>Separating ownership, management and control, and putting the plan on paper.</p></div><div><b>Family constitution</b><p>Values, roles, entry rules for the next generation and how disputes are settled.</p></div><div><b>Holding structures</b><p>Holding companies or family trusts, where they fit the family’s goals.</p></div><div><b>Governance</b><p>Board structure, independent voices and decision rules.</p></div><div><b>Professional finance</b><p>Monthly MIS, budgets and controls that bring discipline as the business grows.</p></div><div><b>Tax and legal steps</b><p>The income tax, stamp duty and company law steps for transfers within the family.</p></div></div>
+
 <h2>Who it is for</h2>
 <ul class="who"><li>Family-owned businesses planning the next generation</li><li>Groups with several companies and assets held by different members</li><li>Promoters professionalising management</li></ul>
 <h2>How we start</h2>
@@ -64,5 +99,26 @@ details{border-top:1px solid var(--rule);padding:14px 0}details:last-of-type{bor
 <section class="more" style="padding-top:0;border-top:0"><h2 style="margin-top:0;font-size:22px">Other services</h2><div class="mg"><a href="virtual-cfo-services.html"><span>Service</span><b>Virtual CFO services</b></a><a href="tax-gst-advisory.html"><span>Service</span><b>Tax and GST advisory</b></a><a href="fundraising-due-diligence.html"><span>Service</span><b>Fundraising and due diligence</b></a><a href="cross-border-tax-structuring.html"><span>Service</span><b>Cross-border tax structuring</b></a><a href="india-entry-gcc-setup.html"><span>Service</span><b>India entry and GCC set-up</b></a></div></section>
 </main>
 <footer><div class="wrap"><a href="/"><img src="/assets/brand/growledger-lockup-light-400.webp" alt="GrowLedger Advisors" width="148" height="40"></a><span>© 2026 GrowLedger Advisors LLP · <a href="/privacy.html">Privacy policy</a> · info@growledger.com · +91 81058 53262</span></div></footer>
+<a class="wa-f" href="https://wa.me/918105853262?text=Hello%20GrowLedger%2C%20I%27d%20like%20to%20book%20a%20free%2030-minute%20review." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.4L3 21l2.1-5.6A8.4 8.4 0 1 1 21 11.5z"/><path d="M9 9.5c.4 1.8 2.5 4 4.6 4.6l1.2-1.2 2 .8-.4 1.9c-3.7.3-8.5-4.5-8.2-8.2l1.9-.4.8 2z"/></svg><span>WhatsApp a partner</span></a><nav class="mbar" aria-label="Quick contact"><a href="tel:+918105853262"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>Call</a><a href="https://wa.me/918105853262?text=Hello%20GrowLedger%2C%20I%27d%20like%20to%20book%20a%20free%2030-minute%20review." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.4L3 21l2.1-5.6A8.4 8.4 0 1 1 21 11.5z"/><path d="M9 9.5c.4 1.8 2.5 4 4.6 4.6l1.2-1.2 2 .8-.4 1.9c-3.7.3-8.5-4.5-8.2-8.2l1.9-.4.8 2z"/></svg>WhatsApp</a><a class="p" href="/#contact">Free review</a></nav><script>(function(){var d=document.documentElement;
+var wa=document.querySelector('.wa-f');if(wa){var sw=function(){wa.classList.toggle('show',scrollY>500)};addEventListener('scroll',sw,{passive:true});sw()}
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+[].forEach.call(document.querySelectorAll('.rot[data-words]'),function(r){var w=r.getAttribute('data-words').split('|'),i=0;if(reduce)return;setInterval(function(){r.classList.remove('inw');r.classList.add('out');setTimeout(function(){i=(i+1)%w.length;r.textContent=w[i];r.classList.remove('out');r.classList.add('inw')},340)},2400)});
+if(!window.IntersectionObserver||reduce)return;d.classList.add('mo');
+var G=[['main h1, main h2, .h2','rv-wipe'],['main .eyebrow','rv-ls'],['.pillars3 > *, .d90-g > *, .two > *, .chk > *','rv-side'],['.pp .ph, .people img','rv-photo'],['.nums > *, .itot > *, .kpis > *, .levt > *','rv-zoom'],['.steps4 > *, .tl > *, .steps5 > *, .offices > *','rv-l'],['.big, .quote blockquote, .lead, .sub','rv-blur'],
+['.sec .wrap > *, .sec2 > *, .hero2 .in > *, main article > *, .csg > *, .rg > *, .grid3 > *, .people > *, .roles > *, .mg > *, .svc > *, .jd > *, .pains > *, .exp .svc > *, .serve-grid > *, .ind li, details, .cta, .map tr, .prom li','rv-up']];
+var seen=new Set(),els=[];
+G.forEach(function(g){[].forEach.call(document.querySelectorAll(g[0]),function(e){if(seen.has(e)||e.closest('.hero,.top,.drawer,footer,.mbar,.wa-f,[hidden]'))return;var a=e.parentElement,skip=false;while(a&&a!==document.body){if(seen.has(a)&&!a.matches('.sec .wrap,.sec2,article,main,section,.hero2 .in')){skip=true;break}a=a.parentElement}if(skip)return;seen.add(e);var c=g[1];if(c==='rv-side'){c=([].indexOf.call(e.parentElement.children,e)%2)?'rv-r':'rv-l'}e.classList.add('rv',c);els.push(e)})});
+els.forEach(function(e){var i=[].indexOf.call(e.parentElement.children,e);e.style.transitionDelay=(Math.min(i,7)*75)+'ms'});
+function count(el){var t=el.textContent,m=t.match(/(\d+(?:\.\d+)?)/);if(!m)return;var end=parseFloat(m[1]),dec=(m[1].split('.')[1]||'').length,pre=t.slice(0,m.index),post=t.slice(m.index+m[1].length),t0=null;
+function f(ts){t0=t0||ts;var k=Math.min(1,(ts-t0)/1400);k=1-Math.pow(1-k,3);el.textContent=pre+(end*k).toFixed(dec)+post;if(k<1)requestAnimationFrame(f)}requestAnimationFrame(f)}
+var M=new Map();function watch(t,e){if(!M.has(t))M.set(t,[]);M.get(t).push(e)}
+els.forEach(function(e){watch(e.classList.contains('rv-wipe')?e.parentElement:e,e)});
+var io=new IntersectionObserver(function(es){es.forEach(function(x){if(!x.isIntersecting)return;var t=x.target;io.unobserve(t);(M.get(t)||[]).forEach(function(e){e.classList.add('in')});if(t.hasAttribute('data-count'))count(t)})},{rootMargin:'0px 0px -7% 0px',threshold:0});
+M.forEach(function(v,t){io.observe(t)});[].forEach.call(document.querySelectorAll('[data-count]'),function(e){if(!M.has(e)){M.set(e,[]);io.observe(e)}});
+var bar=document.createElement('div');bar.className='sprog';bar.setAttribute('aria-hidden','true');document.body.appendChild(bar);
+var par=[].slice.call(document.querySelectorAll('[data-par]')),tick=false;
+function on(){tick=false;var h=d.scrollHeight-innerHeight,y=scrollY;bar.style.transform='scaleX('+(h>0?y/h:0)+')';par.forEach(function(p){if(y<innerHeight*1.2)p.style.transform='translate3d(0,'+(y*0.16)+'px,0)'})}
+addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(on)}},{passive:true});on();
+})();</script>
 </body>
 </html>
