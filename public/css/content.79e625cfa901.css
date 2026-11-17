@@ -33,4 +33,3 @@ article:has(.roles){max-width:1000px}
 .mbar a{display:flex;align-items:center;justify-content:center;gap:6px;min-height:54px;color:#F2F4F2;text-decoration:none;font:700 14px 'Archivo',Arial,sans-serif;border-left:1px solid rgba(242,244,242,.12)}
 .mbar a:first-child{border-left:0}.mbar a.p{background:#8CC07D;color:#0E1713}.mbar svg{width:18px;height:18px}
 body{padding-bottom:calc(54px + env(safe-area-inset-bottom,0px))}}
-
