@@ -5,6 +5,7 @@ import re
 import sys
 import unittest
 import hashlib
+import fnmatch
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urljoin, urlsplit
@@ -127,6 +128,20 @@ class SiteChecks(unittest.TestCase):
                 if match:
                     self.assertEqual(hashlib.sha256(asset.read_bytes()).hexdigest()[:12], match[1], str(asset))
                     self.assertIn("/" + asset.relative_to(PUBLIC).as_posix() + "\n  Cache-Control: public, max-age=31536000, immutable", headers)
+
+    def test_each_asset_has_one_cache_policy(self):
+        policies = []
+        pattern = None
+        for line in (PUBLIC / "_headers").read_text().splitlines():
+            if line.startswith("/"):
+                pattern = line
+            elif line.strip().lower().startswith("cache-control:"):
+                policies.append(pattern)
+        for folder in (PUBLIC / "js", PUBLIC / "css"):
+            for asset in folder.iterdir():
+                pathname = "/" + asset.relative_to(PUBLIC).as_posix()
+                matches = [p for p in policies if fnmatch.fnmatchcase(pathname, p)]
+                self.assertEqual(len(matches), 1, f"{pathname}: overlapping Cache-Control rules {matches}")
 
 
 if __name__ == "__main__":

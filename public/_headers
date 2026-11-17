@@ -8,10 +8,7 @@
 /assets/*
   Cache-Control: public, max-age=86400, must-revalidate
 
-/css/*
-  Cache-Control: public, max-age=86400, must-revalidate
-
-/js/*
+/css/styles.css
   Cache-Control: public, max-age=86400, must-revalidate
 
 # These files carry a SHA-256 content prefix in their filename.
