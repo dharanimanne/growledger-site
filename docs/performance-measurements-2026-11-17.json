@@ -1,0 +1,182 @@
+{
+  "date": "2026-11-17",
+  "baseRevision": "42be17e",
+  "tool": "Lighthouse 13.6.0",
+  "environment": "Local Wrangler 4.164.0, same machine, serial cold-load runs; no production edge analytics injected",
+  "before": {
+    "url": "http://localhost:8791/",
+    "count": 3,
+    "summary": [
+      {
+        "device": "mobile",
+        "samples": [
+          {
+            "performance": 100,
+            "accessibility": 92,
+            "seo": 100,
+            "lcp": 821.2057,
+            "cls": 0,
+            "tbt": 18,
+            "bytes": 99817
+          },
+          {
+            "performance": 100,
+            "accessibility": 92,
+            "seo": 100,
+            "lcp": 821.3979,
+            "cls": 0,
+            "tbt": 0,
+            "bytes": 99817
+          },
+          {
+            "performance": 100,
+            "accessibility": 92,
+            "seo": 100,
+            "lcp": 820.32175,
+            "cls": 0,
+            "tbt": 9,
+            "bytes": 99817
+          }
+        ],
+        "median": {
+          "performance": 100,
+          "accessibility": 92,
+          "seo": 100,
+          "lcp": 821.2057,
+          "cls": 0,
+          "tbt": 9,
+          "bytes": 99817
+        }
+      },
+      {
+        "device": "desktop",
+        "samples": [
+          {
+            "performance": 100,
+            "accessibility": 96,
+            "seo": 100,
+            "lcp": 224.6303,
+            "cls": 0,
+            "tbt": 0,
+            "bytes": 99817
+          },
+          {
+            "performance": 100,
+            "accessibility": 96,
+            "seo": 100,
+            "lcp": 224.39175,
+            "cls": 0,
+            "tbt": 0,
+            "bytes": 99817
+          },
+          {
+            "performance": 100,
+            "accessibility": 96,
+            "seo": 100,
+            "lcp": 220.95635,
+            "cls": 0,
+            "tbt": 0,
+            "bytes": 99817
+          }
+        ],
+        "median": {
+          "performance": 100,
+          "accessibility": 96,
+          "seo": 100,
+          "lcp": 224.39175,
+          "cls": 0,
+          "tbt": 0,
+          "bytes": 99817
+        }
+      }
+    ]
+  },
+  "after": {
+    "url": "http://localhost:8790/",
+    "count": 3,
+    "summary": [
+      {
+        "device": "mobile",
+        "samples": [
+          {
+            "performance": 100,
+            "accessibility": 100,
+            "seo": 100,
+            "lcp": 908.7149999999999,
+            "cls": 0,
+            "tbt": 0,
+            "bytes": 92038
+          },
+          {
+            "performance": 100,
+            "accessibility": 100,
+            "seo": 100,
+            "lcp": 911.5261,
+            "cls": 0,
+            "tbt": 0,
+            "bytes": 92038
+          },
+          {
+            "performance": 100,
+            "accessibility": 100,
+            "seo": 100,
+            "lcp": 912.2896000000001,
+            "cls": 0,
+            "tbt": 0,
+            "bytes": 92038
+          }
+        ],
+        "median": {
+          "performance": 100,
+          "accessibility": 100,
+          "seo": 100,
+          "lcp": 911.5261,
+          "cls": 0,
+          "tbt": 0,
+          "bytes": 92038
+        }
+      },
+      {
+        "device": "desktop",
+        "samples": [
+          {
+            "performance": 100,
+            "accessibility": 100,
+            "seo": 100,
+            "lcp": 251.91230000000002,
+            "cls": 0,
+            "tbt": 0,
+            "bytes": 92038
+          },
+          {
+            "performance": 100,
+            "accessibility": 100,
+            "seo": 100,
+            "lcp": 248.1255,
+            "cls": 0,
+            "tbt": 0,
+            "bytes": 92038
+          },
+          {
+            "performance": 100,
+            "accessibility": 100,
+            "seo": 100,
+            "lcp": 252.9026,
+            "cls": 0,
+            "tbt": 0,
+            "bytes": 92038
+          }
+        ],
+        "median": {
+          "performance": 100,
+          "accessibility": 100,
+          "seo": 100,
+          "lcp": 251.91230000000002,
+          "cls": 0,
+          "tbt": 0,
+          "bytes": 92038
+        }
+      }
+    ]
+  }
+}

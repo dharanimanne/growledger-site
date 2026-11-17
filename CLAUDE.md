@@ -1,36 +1,43 @@
 # CLAUDE.md
 
-GrowLedger Advisors marketing site, live at https://growledger.com. Static HTML/CSS/JS with no build step, served by the Cloudflare Worker `growledger-website` (static assets only).
+Read and follow [AGENTS.md](AGENTS.md) for detailed SEO, performance, privacy, accessibility and verification rules. Keep the two instruction files consistent.
 
-## Layout
+## Source and deployment
 
-- `public/` is the published site. Everything outside it (this file, README, wrangler.jsonc, .github) is never served.
-- `public/index.html` holds all page content, the SEO meta tags and the JSON-LD structured data.
-- `public/css/styles.css`: `@font-face` rules first, then design tokens in `:root`. Reuse the tokens (`--green`, `--brass`, `--ink-2`, `--serif`, `--sans`) rather than new colours or fonts.
-- `public/js/main.js`: mobile menu, copy buttons, and the Join Us form (builds a WhatsApp/email message; nothing is sent to a server).
+This repository serves the live `https://growledger.com/` website through Cloudflare Worker `growledger-website`. It uses static HTML/CSS/JS with no application build step. The sibling Astro showcase is a separate staging application.
 
-## Rules for edits
+Branch from `main`, verify locally, then push a pull request. Never push to `main` directly: merging deploys production. Cloudflare Workers Builds uploads branch previews; deploys/merges and DNS or edge-rule changes need an explicit request. Do not modify MX or mail-related TXT records.
 
-- Branch from `main` and open a pull request. Never push to `main` directly: merging to `main` deploys to the live site.
-- Keep copy changes in sync: if you rename a practice, partner or contact detail in the page, update the JSON-LD block in `<head>` too.
-- When page content changes, set `<lastmod>` in `public/sitemap.xml` to today's date.
-- Images: add WebP, with explicit `width`/`height`, a meaningful `alt`, and `loading="lazy"` below the fold. Partner photos are 296×296.
-- The page must work from 320px wide with no horizontal scroll, and keep text contrast at WCAG AA (4.5:1). `--brass` is already tuned for this.
-- Keep a single `<h1>`; each section has an `<h2>`.
-- Do not invent facts (clients, figures, credentials, addresses). Ask instead.
+## Layout and editing
 
-## Checks
+- `public/` contains all published assets. `index.html` holds homepage markup, essential styles and JSON-LD. Page files live under `services/`, `case-studies/`, `insights/`, plus privacy and CFO-role pages.
+- `public/js/home.<hash>.js` enhances filters, keyboard tabs, mobile menu and the FormSubmit enquiry form. `public/js/site.<hash>.js` handles WhatsApp visibility and privacy-safe conversion hooks. The hook emits only an allowlisted event name and canonical path, never submitted data or contact URL queries.
+- Shared subpage styles and accessibility rules live in `public/css/*.<hash>.css`. Keep design tokens and existing brand vocabulary. After editing fingerprinted CSS/JS, run `npm run assets:hash` to rename assets and update HTML/header references. Never edit content under an immutable filename without rehashing.
+- Physical `.html` files are served at extensionless canonical URLs; directory `index.html` files use trailing-slash routes. Align exactly one canonical, Open Graph/schema URLs, internal links, sitemap and redirects. Legacy `.html` URLs must permanently redirect to the matching final route, preserving queries.
+- `public/_redirects` lists known aliases only. Unknown paths return a useful real-status 404, never a homepage redirect. `public/sitemap.xml` covers every intended canonical page and uses truthful `lastmod` dates.
 
-The `Check site` GitHub Action runs on every pull request: HTML validation, JSON-LD/manifest/sitemap parsing, missing-file references and a Wrangler dry run. Run locally with:
+## SEO, performance and content requirements
+
+- Render useful content, unique title/description, one descriptive h1 and logical headings in initial HTML. Keep services and existing article links crawlable without JavaScript. Publish truthful structured data that matches visible content; retain one consistent breadcrumb trail and validate affected schema.
+- Aim for real-user p75 LCP <= 2.5 s, INP <= 200 ms and CLS <= 0.1. Record repeatable production/lab evidence before and after delivery changes; lab timings and Lighthouse scores are not field results or guarantees.
+- Keep the hero stable and service-led. Send minimal deferred, page-specific JavaScript. Remove code/styles only after source/coverage checks, including dynamic states. Preserve no-JavaScript navigation/contact/service fallbacks and reduced motion; avoid continuous decorative timers and scroll layout work.
+- Use appropriately sized WebP/AVIF photography, explicit dimensions, meaningful alt text (empty for decorative media), and lazy loading below the fold. Keep the LCP asset eager. Retain local subset WOFF2 fonts and preload only the critical face. Do not add large stock imagery, chat or dependencies without measuring impact.
+- Confirm compression and caching on real responses. Only content-fingerprinted assets get immutable year-long caching; changing HTML must revalidate. Keep CSS lean without deferring essential styles that cause flashes/layout shifts.
+- Test keyboard/focus/menu/tab behaviour, contrast and forms at 360, 390, 768, 1024 and 1440 px; also check 320px when changing narrow layouts. Floating controls must not obscure content. Never invent clients, credentials, testimonials, locations or performance figures.
+- Cloudflare Web Analytics is already injected at the edge. Do not duplicate its beacon or assume it supports custom events. Contact-click hooks are not completed leads; emit enquiry success only after provider acceptance. No form fields, emails, phone numbers or URL queries may enter analytics. Preserve privacy wording and FormSubmit consent/fallback paths.
+- Do not add a blog or expand Insights without a request. Improve existing substantive service pages, internal links and verified credibility. Domain/page authority are third-party diagnostics; use relevant search visibility and qualified enquiries to judge results.
+
+## Checks and release handoff
 
 ```sh
-npx -y html-validate@9 --rule 'no-inline-style:off' --rule 'doctype-style:off' public/index.html public/404.html
-npx wrangler dev        # http://localhost:8787, Cloudflare runtime incl. _headers and 404
+npm ci
+npm run check                # all HTML, SEO, sitemap, assets and legacy redirect inventory
+npm run dev                  # Wrangler on http://localhost:8790
+npm run check:browser        # separate terminal; routes, layouts, axe, mocked forms and no-JS
+npm run check:deploy         # dry run only; no publication
+npm run check:perf -- http://localhost:8790/ output/lighthouse
 ```
 
-## Deploys
+Install the QA browser with `npx playwright install chromium`. To use locally installed Chrome, set `BROWSER_CHANNEL=chrome` for the browser check. Screenshots/raw reports stay in ignored `output/`. Do not send real test enquiries; the browser suite intercepts provider requests.
 
-Cloudflare Workers Builds is connected to this repo:
-- Pull request / non-`main` branch: uploads a preview version and comments its `*.workers.dev` preview URL on the PR. The live site is untouched.
-- Merge to `main`: `npx wrangler deploy` publishes to growledger.com.
-- Undo a bad release: `npx wrangler rollback`, or revert the merge commit.
+After an explicitly approved production deployment, verify real hostname redirect chains, raw metadata, sitemap, schema, assets, mobile/contact behaviour and dashboard receipt. HTTP/www edge rules are separate from repository `_redirects`; see the release checklist in `docs/seo-performance-2026-11-17.md`. Report checks actually run and remaining account/rollout work. For documentation-only edits, formatting, links and diff verification suffice.

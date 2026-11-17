@@ -1,0 +1,24 @@
+{
+  "name": "growledger-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --port 8790",
+    "check": "python3 scripts/check_site.py && html-validate --rule no-inline-style:off --rule doctype-style:off 'public/**/*.html'",
+    "check:browser": "node scripts/check-browser.mjs",
+    "check:deploy": "wrangler deploy --dry-run",
+    "deploy": "wrangler deploy",
+    "assets:hash": "node scripts/hash-assets.mjs",
+    "check:perf": "node scripts/measure-performance.mjs"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "html-validate": "11.21.1",
+    "lighthouse": "13.6.0",
+    "playwright": "1.65.1",
+    "wrangler": "4.164.0"
+  },
+  "engines": {
+    "node": ">=22.19 <26"
+  }
+}
