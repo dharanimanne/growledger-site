@@ -1,58 +1,57 @@
 # GrowLedger Advisors website
 
-A static, single-page site built from the approved Claude artifact design. It needs no build step and no server code.
+Source for the live `https://growledger.com/` website. Static HTML, CSS and JavaScript are served by Cloudflare Worker `growledger-website`; there is no application build step or database.
 
-```
-wrangler.jsonc        Cloudflare Worker config (static assets only, serves public/)
-public/               everything below is what gets published
-index.html            the whole home page: markup, inline styles and script, SEO meta tags, JSON-LD
-  privacy.html          privacy policy
-  insights/             one page per Insights article
-404.html              not-found page (wrangler.jsonc: not_found_handling "404-page")
-css/styles.css        styles for 404.html
-assets/fonts/         Instrument Serif and Archivo (latin subset, woff2, OFL)
-assets/brand/         logo (full-size PNG for search engines, 400px WebP for the page), icons, og-image.png
-assets/team/          partner photos (296px WebP)
-robots.txt            allows all crawlers, points to the sitemap
-sitemap.xml           single-URL sitemap (update <lastmod> when content changes)
-site.webmanifest      app name and icons
-_headers              security and cache headers (applied by Cloudflare)
-favicon.ico           32px fallback icon
-```
+## Files and routes
 
-## Run locally
+- `public/index.html`: homepage, static content and JSON-LD.
+- `public/services/`: six substantive service pages.
+- `public/case-studies/`: an index and nine illustrative case studies.
+- `public/insights/`: the existing index and twelve published articles. No new blog or article expansion is part of the improvement brief.
+- `public/the-cfo-role.html`, `public/privacy.html`, `public/404.html`: CFO self-check, privacy policy and branded error page.
+- `public/js/home.<hash>.js`: deferred homepage filters, keyboard tabs, mobile menu and contact enhancement.
+- `public/js/site.<hash>.js`: shared WhatsApp visibility and local conversion event hooks.
+- `public/css/*.<hash>.css`: shared subpage/accessibility styles; homepage essential styles remain inline.
+- `public/assets/`: local subset WOFF2 fonts, WebP logos/portraits and social image.
+- `public/_redirects`, `_headers`, `robots.txt`, `sitemap.xml`: permanent legacy-route redirects, response/cache headers, crawling policy and complete static sitemap.
+- `scripts/`: checks, asset fingerprinting and repeatable Lighthouse measurements.
+- `wrangler.jsonc`: static asset hosting configuration and custom domains.
+
+Canonical pages use extensionless file URLs (for example `/services/virtual-cfo-services`) and trailing slashes for directory indexes (`/case-studies/`). Physical `.html` files stay in place; old published URLs redirect permanently to their equivalent canonical page, preserving query strings. Missing pages return a real 404.
+
+## Local development and verification
+
+Use Node.js 22.19 or newer, below 26, and npm.
 
 ```sh
-npx wrangler dev             # Cloudflare runtime, http://localhost:8787 (applies _headers and 404)
-cd public && python3 -m http.server 8000   # or any static server
+npm ci
+npm run dev                  # http://localhost:8790; applies redirects, headers and real 404 handling
 ```
 
-Serve public/ at the site root: icons, fonts and the 404 page use root-relative paths (`/assets/...`).
+In a second terminal:
 
-## Forms
+```sh
+npm run check                # every HTML page, metadata, links, JSON-LD, sitemap, asset hashes
+npx playwright install chromium
+npm run check:browser        # routes, five widths, axe, keyboard, no-JS, intercepted form requests
+npm run check:deploy         # package validation only, no deployment
+npm run check:perf -- http://localhost:8790/ output/lighthouse
+```
 
-The contact form posts to FormSubmit (https://formsubmit.co), which emails each message to info@growledger.com. The first live submission sends an activation email to that inbox; click it once. If sending fails, the form offers WhatsApp (+91 81058 53262) or email instead.
+`BROWSER_CHANNEL=chrome npm run check:browser` can use a locally installed Chrome. Browser evidence and raw Lighthouse reports go into ignored `output/`. The performance command runs three mobile and three desktop samples serially and writes medians; compare the same URL/environment and distinguish these lab results from field data.
 
-## SEO notes
+After editing a fingerprinted script or stylesheet, run `npm run assets:hash`. This renames changed files from their SHA-256 prefix and updates all page/header references. Do not keep changed bytes under an immutable cached URL. Unversioned assets use a short revalidatable cache policy.
 
-- Canonical, Open Graph, Twitter and JSON-LD URLs all assume `https://growledger.com/`. Change them in `index.html`, `robots.txt` and `sitemap.xml` if the domain differs.
-- Structured data is a `ProfessionalService` with the partners and six practices. Add a `PostalAddress` (and `sameAs` profile links such as LinkedIn) once confirmed; both help local search.
-- After launch, add the site to Google Search Console and Bing Webmaster Tools and submit `sitemap.xml`.
+## Contact and analytics
 
-## Editing and deploying
+The form posts to FormSubmit, which delivers enquiries to `info@growledger.com`. JavaScript adds validation, a 15-second timeout and WhatsApp/email alternatives on failure. Without JavaScript the form uses a normal POST. Provider acceptance is distinct from final inbox delivery; confirm delivery with the mailbox owner after an approved release. The browser suite intercepts all test submissions and sends no real enquiries.
 
-Changes go through GitHub pull requests; Cloudflare Workers Builds deploys them:
+Cloudflare injects its Web Analytics beacon into the deployed site. Do not add a duplicate tracker. It provides traffic and real-user performance metrics but does not support custom conversion events. `growledger:conversion` is a browser integration hook containing only an allowlisted `name` and canonical `path`; it is not a network collector or persistent dashboard. A future collector requires an explicitly chosen account/provider and privacy review. Never forward form contents, email addresses, phone numbers, query strings or full WhatsApp URLs to analytics.
 
-1. Edit on a branch (yourself, or ask Claude at claude.ai/code with this repo selected) and open a pull request.
-2. The `Check site` action validates the change, and Cloudflare comments a preview URL on the pull request. Check the page there.
-3. Merge the pull request. Cloudflare deploys `main` to https://growledger.com within a minute or two.
+## Publishing
 
-Undo a release with `npx wrangler rollback` or by reverting the merge on GitHub. See `CLAUDE.md` for editing rules.
+Work on a branch and open a pull request. The `Check site` action validates every page, runs the browser regression suite, uploads evidence and performs a Wrangler dry run. Cloudflare Workers Builds provides branch previews where configured. Merging to `main` deploys the live site; do not push directly to main.
 
-`growledger.com` and `www.growledger.com` are Worker custom domains (`wrangler.jsonc`); a Cloudflare Redirect Rule sends `www` to the apex. Never change the zone's MX or TXT (SPF, DKIM, DMARC) records; they carry `info@growledger.com` mail.
+Before merging, review [the improvement report and release checklist](docs/seo-performance-2026-11-17.md). HTTP/www redirects are configured at the Cloudflare zone and must be reviewed separately from repository `_redirects`; do not modify mail MX/TXT records. Undo an approved release by reverting its merge or selecting the previous verified Worker version.
 
-## Pages
-
-- `/` home page, `/the-cfo-role.html` (nine CFO roles and a self-check), `/privacy.html`
-- `/services/` six service pages, `/insights/` articles, `/case-studies/` illustrative case studies
-- Scroll effects, the floating WhatsApp button and the phone quick-contact bar are inline in each page; they switch off for visitors who prefer reduced motion.
+Read [AGENTS.md](AGENTS.md) and [CLAUDE.md](CLAUDE.md) before future revisions. The sibling `Growledger-website` repository is a separate Astro staging showcase and is not deployed by changes here.

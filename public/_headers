@@ -6,10 +6,26 @@
   Permissions-Policy: camera=(), microphone=(), geolocation=()
 
 /assets/*
-  Cache-Control: public, max-age=2592000
+  Cache-Control: public, max-age=86400, must-revalidate
 
 /css/*
   Cache-Control: public, max-age=86400, must-revalidate
 
 /js/*
   Cache-Control: public, max-age=86400, must-revalidate
+
+# These files carry a SHA-256 content prefix in their filename.
+/js/site.01b3c0e33a71.js
+  Cache-Control: public, max-age=31536000, immutable
+/js/home.9ecf1353cb5a.js
+  Cache-Control: public, max-age=31536000, immutable
+/css/accessibility.0c22e607fa85.css
+  Cache-Control: public, max-age=31536000, immutable
+/css/content.79e625cfa901.css
+  Cache-Control: public, max-age=31536000, immutable
+/css/content.61cd77874f88.css
+  Cache-Control: public, max-age=31536000, immutable
+/css/content.ea2df3e1281c.css
+  Cache-Control: public, max-age=31536000, immutable
+/css/content.6f7b0efbf0a2.css
+  Cache-Control: public, max-age=31536000, immutable

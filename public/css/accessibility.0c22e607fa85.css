@@ -1,0 +1,11 @@
+[hidden]{display:none!important}
+.skip-link{position:fixed;left:16px;top:8px;z-index:999;transform:translateY(-150%);background:#fff;color:#111613;padding:12px 18px;font-weight:700}.skip-link:focus{transform:none}
+:focus-visible{outline:3px solid #2E6B3C;outline-offset:4px}
+.dark :focus-visible,.hero :focus-visible{outline-color:#8CC07D}
+body{overflow-wrap:break-word}
+img{max-width:100%;height:auto}
+main{scroll-margin-top:100px}
+@media(max-width:720px){.mbar a{font-size:13px}body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+.crumb a{text-decoration:underline;text-underline-offset:.18em}
